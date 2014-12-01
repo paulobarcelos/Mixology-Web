@@ -59,7 +59,7 @@ function (
 
 
 			var titleNode = document.createElement('h1');
-			titleNode.innerHTML = "Mx Lead";
+			titleNode.innerHTML = "Mx";
 			self.container.appendChild(titleNode);
 
 			var dropcache = (window.location.search.indexOf('dropcache')!=-1);
