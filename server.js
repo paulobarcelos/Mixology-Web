@@ -2,8 +2,7 @@ var static = require('node-static');
 var file = new static.Server('./public', {cache:0});
 
 var instalations = [
-	'nordictable',
-	'test'
+	'demo'
 ]
 require('http').createServer(function (request, response) {
 	
