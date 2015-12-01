@@ -30,7 +30,7 @@ function (
 	CombinationPublisher
 ){
 	var App = function(){
-		var 
+		var
 		self = this,
 		user,
 		flavors,
@@ -39,13 +39,13 @@ function (
 		ratingSelector,
 		endScreen,
 		commentSelector,
-		host = "http://127.0.0.1:8000/"; 
+		host = "http://127.0.0.1:8000/";
 
 		if(window.MX_API){
 			host = window.MX_API;
 		}
 
-		var setup = function(){	
+		var setup = function(){
 			self.setFPS(0);
 
 			/*document.addEventListener('touchmove', function(e) {
@@ -59,21 +59,21 @@ function (
 
 
 			var titleNode = document.createElement('h1');
-			titleNode.innerHTML = "Mx";
+			titleNode.innerHTML = "";
 			self.container.appendChild(titleNode);
 
 			var dropcache = (window.location.search.indexOf('dropcache')!=-1);
 			if(dropcache){
-				localStorage.removeItem('user'); 
-				
-			}
-			localStorage.removeItem('flavors'); 
+				localStorage.removeItem('user');
 
-			var userData = localStorage.getItem('user'); 
+			}
+			localStorage.removeItem('flavors');
+
+			var userData = localStorage.getItem('user');
 			if(userData) onUserDataAcquired(userData);
 			else loadUserData();
 
-			var flavorsData = localStorage.getItem('flavors'); 
+			var flavorsData = localStorage.getItem('flavors');
 			if(flavorsData) onFlavorsDataAcquired(flavorsData);
 			else loadFlavorsData();
 
@@ -86,7 +86,7 @@ function (
 			var browserInfo = browser.getInfo();
 			var data = {
 				browser: browserInfo.name + '_' + browserInfo.version + '_' + browserInfo.os
-			}			
+			}
 			/*ajax({
 				url: host + 'api/users',
 				method: 'POST',
@@ -97,7 +97,7 @@ function (
 				},
 				onError: function(request){
 					console.log('Error getting user from server.')
-					console.log(request.status)			
+					console.log(request.status)
 				}
 			});*/
 
@@ -132,16 +132,16 @@ function (
 		}
 
 		var onUserDataAcquired = function(data){
-			localStorage.setItem('user', data); 
+			localStorage.setItem('user', data);
 			user = JSON.parse(data);
 			if(flavors) init();
 		}
 		var onFlavorsDataAcquired = function(data){
-			localStorage.setItem('flavors', data); 
+			localStorage.setItem('flavors', data);
 			flavors = JSON.parse(data);
 			if(user) init();
 		}
-		
+
 		var init = function(){
 			combinationSelector = new CombinationSelector(flavors);
 			combinationSelector.groupChangedSignal.add(onFlavorGroupChanged);
