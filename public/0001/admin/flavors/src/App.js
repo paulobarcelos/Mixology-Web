@@ -47,6 +47,7 @@ function (
 
 			var groups = document.createElement('input');
 			groups.type = 'text';
+			groups.placeholder = 'group';
 			formContainer.appendChild(groups);
 
 			var addBtn = document.createElement('button');
