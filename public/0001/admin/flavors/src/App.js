@@ -13,18 +13,18 @@ function (
 	indexOf
 ){
 	var App = function(){
-		var 
+		var
 		self = this,
 		container,
 		host = "http://127.0.0.1:8000/",
-		action = 'flavors'; 
+		action = 'flavors';
 
 		if(window.MX_API){
 			host = window.MX_API;
 		}
 
 
-		var setup = function(){	
+		var setup = function(){
 			self.setFPS(0);
 
 			var formContainer = document.createElement('div');
@@ -40,20 +40,25 @@ function (
 			color.placeholder = 'color';
 			formContainer.appendChild(color);
 
+			var size = document.createElement('input');
+			size.type = 'number';
+			size.placeholder = 'size';
+			formContainer.appendChild(size);
+
 			var groups = document.createElement('input');
 			groups.type = 'text';
 			formContainer.appendChild(groups);
 
 			var addBtn = document.createElement('button');
 			addBtn.innerHTML = 'add';
-			formContainer.appendChild(addBtn);			
+			formContainer.appendChild(addBtn);
 			addBtn.addEventListener('click', function(){
 				add(name.value, color.value, groups.value.split(','));
 			});
 
 			var deleteAllBtn = document.createElement('button');
 			deleteAllBtn.innerHTML = 'DELETE ALL';
-			formContainer.appendChild(deleteAllBtn);			
+			formContainer.appendChild(deleteAllBtn);
 			deleteAllBtn.addEventListener('click', function(){
 				if(confirm("Do you really wanna delete?"))	removeAll();
 			});
@@ -82,7 +87,7 @@ function (
 			var item = document.createElement('div');
 			item.style.color = data.color;
 			item.style.backgroundColor	 = data.color;
-			item.id = data._id; 
+			item.id = data._id;
 
 			var name = document.createElement('input');
 			name.type = 'text';
@@ -93,6 +98,11 @@ function (
 			color.type = 'text';
 			color.value = data.color;
 			item.appendChild(color);
+
+			var size = document.createElement('input');
+			size.type = 'number';
+			size.value = data.size;
+			item.appendChild(size);
 
 			var groups = document.createElement('input');
 			groups.type = 'text';
@@ -107,7 +117,7 @@ function (
 			var updateBtn = document.createElement('button');
 			updateBtn.innerHTML = 'update';
 			updateBtn.addEventListener('click', function(){
-				update(data._id, name.value, color.value, groups.value.split(','), created.value);
+				update(data._id, name.value, color.value, size.value, groups.value.split(','), created.value);
 			});
 			item.appendChild(updateBtn);
 
@@ -115,16 +125,17 @@ function (
 			delBtn.innerHTML = 'remove';
 			delBtn.addEventListener('click', function(){
 				remove(data._id);
-			});	
-			item.appendChild(delBtn);		
+			});
+			item.appendChild(delBtn);
 
 			container.appendChild(item);
 		}
 
-		var add = function(name, color, groups){
+		var add = function(name, color, size, groups){
 			var data = {
 				name: name,
 				color: color,
+				size: size,
 				groups: groups
 			}
 
@@ -136,10 +147,11 @@ function (
 				onSuccess: refresh
 			});
 		}
-		var update = function(id, name, color, groups, created){
+		var update = function(id, name, color, size, groups, created){
 			var data = {
 				name: name,
 				color: color,
+				size: size,
 				groups: groups,
 				created: created
 			}

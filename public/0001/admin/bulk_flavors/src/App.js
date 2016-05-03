@@ -13,16 +13,16 @@ function (
 	indexOf
 ){
 	var App = function(){
-		var 
+		var
 		self = this,
 		host = "http://127.0.0.1:8000/",
-		action = 'flavors'; 
+		action = 'flavors';
 
 		if(window.MX_API){
 			host = window.MX_API;
 		}
 
-		var setup = function(){	
+		var setup = function(){
 			self.setFPS(0);
 
 			var formContainer = document.createElement('div');
@@ -34,7 +34,7 @@ function (
 
 			var addBtn = document.createElement('button');
 			addBtn.innerHTML = 'add';
-			formContainer.appendChild(addBtn);			
+			formContainer.appendChild(addBtn);
 			addBtn.addEventListener('click', function(){
 				formContainer.removeChild(addBtn);
 				var entries = bulk.value.split('|');
@@ -44,7 +44,8 @@ function (
 					var flavor = {
 						name: entry[0],
 						color: entry[1],
-						groups: entry[2]
+						size: entry[2],
+						groups: entry[3]
 					}
 					flavors.push(flavor);
 				};
@@ -62,8 +63,9 @@ function (
 			var data = {
 				name: flavor.name,
 				color: flavor.color,
+				size: flavor.size,
 				groups: flavor.groups
-			}			
+			}
 
 			ajax({
 				url: host + 'api/' + action,
