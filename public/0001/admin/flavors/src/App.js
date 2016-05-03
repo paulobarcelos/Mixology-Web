@@ -53,7 +53,7 @@ function (
 			addBtn.innerHTML = 'add';
 			formContainer.appendChild(addBtn);
 			addBtn.addEventListener('click', function(){
-				add(name.value, color.value, groups.value.split(','));
+				add(name.value, color.value, size.value, groups.value.split(','));
 			});
 
 			var deleteAllBtn = document.createElement('button');
