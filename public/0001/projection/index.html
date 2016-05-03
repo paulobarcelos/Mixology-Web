@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>31T</title>
+		<link rel="stylesheet" href="projection/src/style.css">
+	</head>
+	<body>
+		<script>
+			window.MX_API = 'http://api-31t-0001.herokuapp.com/';
+		</script>
+		<script data-main="projection/src/main.js" src="projection/libs/require.js"></script>
+		<script>
+			require.config({
+				urlArgs: (new Date()).getTime()
+			});
+			require({
+				paths: {
+					happy: "../../../happy"
+				}
+			});
+		</script>
+	</body>
+</html>
