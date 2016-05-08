@@ -91,15 +91,15 @@ function (
 			item.style.backgroundColor	 = data.color;
 			item.id = data._id;
 
-			var label = document.createElement('input');
-			label.type = 'text';
-			label.value = data.label;
-			item.appendChild(label);
-
 			var name = document.createElement('input');
 			name.type = 'text';
 			name.value = data.name;
 			item.appendChild(name);
+
+			var label = document.createElement('input');
+			label.type = 'text';
+			label.value = data.label;
+			item.appendChild(label);
 
 			var color = document.createElement('input');
 			color.type = 'text';
@@ -154,8 +154,7 @@ function (
 				name: name,
 				label: label,
 				color: color,
-				size: size,
-				groups: groups
+				size: size
 			}
 
 			ajax({
