@@ -50,12 +50,22 @@ function (
 			size.placeholder = 'size';
 			formContainer.appendChild(size);
 
+			var width = document.createElement('input');
+			width.type = 'number';
+			width.placeholder = 'width (units)';
+			formContainer.appendChild(width);
+
+			var height = document.createElement('input');
+			height.type = 'number';
+			height.placeholder = 'height (units)';
+			formContainer.appendChild(height);
+
 
 			var addBtn = document.createElement('button');
 			addBtn.innerHTML = 'add';
 			formContainer.appendChild(addBtn);
 			addBtn.addEventListener('click', function(){
-				add(name.value, name.label, color.value, size.value);
+				add(name.value, name.label, color.value, size.value, width.value, height.value);
 			});
 
 			var deleteAllBtn = document.createElement('button');
@@ -111,6 +121,16 @@ function (
 			size.value = data.size;
 			item.appendChild(size);
 
+			var width = document.createElement('input');
+			width.type = 'number';
+			width.value = data.width;
+			formContainer.appendChild(width);
+
+			var height = document.createElement('input');
+			height.type = 'number';
+			height.value = data.height;
+			formContainer.appendChild(height);
+
 			var created = document.createElement('input');
 			created.type = 'text';
 			created.value = data.created;
@@ -119,7 +139,7 @@ function (
 			var updateBtn = document.createElement('button');
 			updateBtn.innerHTML = 'update';
 			updateBtn.addEventListener('click', function(){
-				update(data._id, name.value, label.value, color.value, size.value, created.value);
+				update(data._id, name.value, label.value, color.value, size.value, width.value, height.value, created.value);
 			});
 			item.appendChild(updateBtn);
 
@@ -133,12 +153,14 @@ function (
 			container.appendChild(item);
 		}
 
-		var add = function(name, label, color, size){
+		var add = function(name, label, color, size, width, height){
 			var data = {
 				name: name,
 				label: label,
 				color: color,
-				size: size
+				size: size,
+				width: width,
+				height: height
 			}
 
 			ajax({
@@ -149,12 +171,14 @@ function (
 				onSuccess: refresh
 			});
 		}
-		var update = function(id, name, label, color, size, created){
+		var update = function(id, name, label, color, size, width, height, created){
 			var data = {
 				name: name,
 				label: label,
 				color: color,
-				size: size
+				size: size,
+				width: width,
+				height: height
 			}
 
 			ajax({

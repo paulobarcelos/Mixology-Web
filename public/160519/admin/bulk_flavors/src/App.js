@@ -45,7 +45,9 @@ function (
 						name: entry[0],
 						label: entry[1],
 						color: entry[2],
-						size: entry[3]
+						size: entry[3],
+						width: entry[4],
+						height: entry[5]
 					}
 					flavors.push(flavor);
 				};
@@ -64,7 +66,9 @@ function (
 				name: flavor.name,
 				label: flavor.label,
 				color: flavor.color,
-				size: flavor.size
+				size: flavor.size,
+				width: flavor.width,
+				height: flavor.height
 			}
 
 			ajax({
