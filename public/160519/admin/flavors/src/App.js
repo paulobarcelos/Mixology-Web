@@ -124,12 +124,12 @@ function (
 			var width = document.createElement('input');
 			width.type = 'number';
 			width.value = data.width;
-			formContainer.appendChild(width);
+			item.appendChild(width);
 
 			var height = document.createElement('input');
 			height.type = 'number';
 			height.value = data.height;
-			formContainer.appendChild(height);
+			item.appendChild(height);
 
 			var created = document.createElement('input');
 			created.type = 'text';
