@@ -13,18 +13,18 @@ function (
 	indexOf
 ){
 	var App = function(){
-		var 
+		var
 		self = this,
 		container,
 		host = "http://127.0.0.1:8000/",
-		action = 'flavors'; 
+		action = 'flavors';
 
 		if(window.MX_API){
 			host = window.MX_API;
 		}
 
 
-		var setup = function(){	
+		var setup = function(){
 			self.setFPS(0);
 
 			var formContainer = document.createElement('div');
@@ -35,25 +35,42 @@ function (
 			name.placeholder = 'name';
 			formContainer.appendChild(name);
 
+			var label = document.createElement('input');
+			label.type = 'text';
+			label.placeholder = 'label';
+			formContainer.appendChild(label);
+
 			var color = document.createElement('input');
 			color.type = 'text';
 			color.placeholder = 'color';
 			formContainer.appendChild(color);
 
-			var groups = document.createElement('input');
-			groups.type = 'text';
-			formContainer.appendChild(groups);
+			var size = document.createElement('input');
+			size.type = 'number';
+			size.placeholder = 'size';
+			formContainer.appendChild(size);
+
+			var width = document.createElement('input');
+			width.type = 'number';
+			width.placeholder = 'width (units)';
+			formContainer.appendChild(width);
+
+			var height = document.createElement('input');
+			height.type = 'number';
+			height.placeholder = 'height (units)';
+			formContainer.appendChild(height);
+
 
 			var addBtn = document.createElement('button');
 			addBtn.innerHTML = 'add';
-			formContainer.appendChild(addBtn);			
+			formContainer.appendChild(addBtn);
 			addBtn.addEventListener('click', function(){
-				add(name.value, color.value, groups.value.split(','));
+				add(name.value, name.label, color.value, size.value, width.value, height.value);
 			});
 
 			var deleteAllBtn = document.createElement('button');
 			deleteAllBtn.innerHTML = 'DELETE ALL';
-			formContainer.appendChild(deleteAllBtn);			
+			formContainer.appendChild(deleteAllBtn);
 			deleteAllBtn.addEventListener('click', function(){
 				if(confirm("Do you really wanna delete?"))	removeAll();
 			});
@@ -82,22 +99,37 @@ function (
 			var item = document.createElement('div');
 			item.style.color = data.color;
 			item.style.backgroundColor	 = data.color;
-			item.id = data._id; 
+			item.id = data._id;
 
 			var name = document.createElement('input');
 			name.type = 'text';
 			name.value = data.name;
 			item.appendChild(name);
 
+			var label = document.createElement('input');
+			label.type = 'text';
+			label.value = data.label;
+			item.appendChild(label);
+
 			var color = document.createElement('input');
 			color.type = 'text';
 			color.value = data.color;
 			item.appendChild(color);
 
-			var groups = document.createElement('input');
-			groups.type = 'text';
-			groups.value = data.groups;
-			item.appendChild(groups);
+			var size = document.createElement('input');
+			size.type = 'number';
+			size.value = data.size;
+			item.appendChild(size);
+
+			var width = document.createElement('input');
+			width.type = 'number';
+			width.value = data.width;
+			item.appendChild(width);
+
+			var height = document.createElement('input');
+			height.type = 'number';
+			height.value = data.height;
+			item.appendChild(height);
 
 			var created = document.createElement('input');
 			created.type = 'text';
@@ -107,7 +139,7 @@ function (
 			var updateBtn = document.createElement('button');
 			updateBtn.innerHTML = 'update';
 			updateBtn.addEventListener('click', function(){
-				update(data._id, name.value, color.value, groups.value.split(','), created.value);
+				update(data._id, name.value, label.value, color.value, size.value, width.value, height.value, created.value);
 			});
 			item.appendChild(updateBtn);
 
@@ -115,17 +147,20 @@ function (
 			delBtn.innerHTML = 'remove';
 			delBtn.addEventListener('click', function(){
 				remove(data._id);
-			});	
-			item.appendChild(delBtn);		
+			});
+			item.appendChild(delBtn);
 
 			container.appendChild(item);
 		}
 
-		var add = function(name, color, groups){
+		var add = function(name, label, color, size, width, height){
 			var data = {
 				name: name,
+				label: label,
 				color: color,
-				groups: groups
+				size: size,
+				width: width,
+				height: height
 			}
 
 			ajax({
@@ -136,12 +171,14 @@ function (
 				onSuccess: refresh
 			});
 		}
-		var update = function(id, name, color, groups, created){
+		var update = function(id, name, label, color, size, width, height, created){
 			var data = {
 				name: name,
+				label: label,
 				color: color,
-				groups: groups,
-				created: created
+				size: size,
+				width: width,
+				height: height
 			}
 
 			ajax({
